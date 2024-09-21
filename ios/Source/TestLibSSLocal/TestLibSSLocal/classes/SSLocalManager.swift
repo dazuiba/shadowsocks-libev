@@ -7,24 +7,36 @@
 
 import Foundation
 import libsslocal
+
 class SSLocalManager {
     @Published public private(set) var state:State = .None
-    private let queue:DispatchQueue
-    public private(set) var config:SSLocalConf
+    private let operationQueue:DispatchQueue
+    private let serverRunQueue:DispatchQueue
+    public private(set) var config:SSLocalConf!
+    static let shared = SSLocalManager()
+    
+    var lastServerExitCode:Int32?
     
     func start() throws {
         
         try setState(.Connecting)
-        queue.async {
-            let _ = startServer(self.config)
+        operationQueue.async {
+            self.serverRunQueue.async {
+                self.lastServerExitCode = startServer(self.config,delegate: self)
+                logTry{ try self.setState(.None) }
+            }
         }
     }
     
     func stop() throws {
         try setState(.DisConnecting)
-        queue.async {
+        operationQueue.async {
             let _ = stopServer()
         }
+    }
+    
+    fileprivate func ssLocalcallback(){
+        logTry{ try self.setState(.Connected) }
     }
     
     private func setState(_ to:State) throws {
@@ -41,19 +53,26 @@ class SSLocalManager {
         case Connecting
         case Connected
         case DisConnecting
-        
+
         func canTransTo(_ to:State) -> Bool{
             switch to {
             case .Connecting:
                 return self == .None
+            case .DisConnecting:
+                return self == .Connected || self == .Connecting
             default:
                 return true
             }
         }
     }
-    init(config:SSLocalConf) {
-        queue = DispatchSerialQueue(label: "sslocal")
+    
+    public func setConfig(_ config:SSLocalConf){
         self.config = config
+    }
+    
+    private init() {
+        operationQueue = DispatchSerialQueue(label: "sslocal.operation")
+        serverRunQueue = DispatchSerialQueue(label: "sslocal.server")
     }
 }
 
@@ -61,14 +80,14 @@ func stopServer() {
     stop_ss_local_server()
 }
 
-func startServer(_ conf:SSLocalConf) -> Bool{
+func startServer(_ conf:SSLocalConf,delegate:SSLocalManager) -> Int32{
     let profile = profile_t(
         remote_host: strdup(conf.remoteHost),
         local_addr: strdup("127.0.0.1"),
         method: strdup(conf.method),
         password: strdup(conf.password),
         remote_port: conf.remotePort,
-        local_port: 10086,
+        local_port: conf.localPort,
         timeout: 300,
         acl: nil,
         log: strdup(conf.logPath),
@@ -76,17 +95,19 @@ func startServer(_ conf:SSLocalConf) -> Bool{
         mode: 0,
         mtu: 0,
         mptcp: 0,
-        verbose: 0
+        verbose: 1
     )
     
     // 定义回调函数
     let callback: ss_local_callback = { socks_fd, udp_fd, data in
         SSLogger.info("Callback called with socks_fd: \(socks_fd), udp_fd: \(udp_fd)")
+        SSLocalManager.shared.ssLocalcallback()
     }
     // 调用 start_ss_local_server_with_callback
+    
     let result = start_ss_local_server_with_callback(profile, callback, nil)
     SSLogger.info("start_ss_local_server_with_callback result: \(result)")
-    return result == 0
+    return result
 }
 
  
@@ -94,7 +115,7 @@ func startServer(_ conf:SSLocalConf) -> Bool{
 
 public struct SSLogger {
     typealias Listener = (String)->(Void)
-    static var listeners = [Listener]()
+    private static var listeners = [Listener]()
     static func addListener( _ listener: @escaping Listener){
         listeners.append(listener)
     }
@@ -105,39 +126,35 @@ public struct SSLogger {
             $0(str)
         }
     }
+    private init(){
+        
+    }
 }
 
-struct SSLocalConf {
+struct SSLocalConf :Codable {
     let remoteHost:String
     let remotePort:Int32
     let method:String
     let password:String
-    let localPort:Int32
+    var localPort:Int32
     let logPath:String
     static func parse(url:String, localPort:Int32 = 10086, logPath:String) -> Self? {
         // ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?outline=1
+        // ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp3RUJpRXZjSmVvQmZsUGNUZTlLd2NH@@10.0.0.19:33533/?outline=1
         guard let url = URL(string: url) else { return nil }
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        let userInfo = components?.user ?? ""
+        let user = components?.user ?? ""
+        let pass = components?.password ?? ""
         let host = components?.host ?? ""
         let port = components?.port ?? 0
-        let methodAndPassword = userInfo.split(separator: ":")
-        let method = String(methodAndPassword.first ?? "")
-        let password = String(methodAndPassword.last ?? "")
         
         return SSLocalConf(
             remoteHost: host,
             remotePort: Int32(port),
-            method: method,
-            password: password,
+            method: user,
+            password: pass,
             localPort: localPort, // 默认本地端口
             logPath: logPath // 默认日志路径
         )
     }
-}
-
-
-enum SSLocalError : Error {
-    case configNotSet
-    case common(String)
 }

@@ -6,7 +6,30 @@
 //
 
 import UIKit
+func makeSandboxLink() {
+    let sandboxRoot = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last?.deletingLastPathComponent() ?? ""
+    let link = "/tmp/sim_sslocal"
+    let fileManager = FileManager.default
+    
+    do {
+        try fileManager.removeItem(atPath: link)
+    } catch {
+        // 忽略错误
+    }
+    
+    do {
+        try fileManager.createSymbolicLink(atPath: link, withDestinationPath: sandboxRoot)
+        print("mklink: \(link) -> \(sandboxRoot)")
+    } catch {
+        print("Failed to create symbolic link: \(error)")
+    }
+}
 
+extension String {
+    func deletingLastPathComponent() -> String {
+        return (self as NSString).deletingLastPathComponent
+    }
+}
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
@@ -16,6 +39,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
         // If using a storyboard, the `window` property will automatically be initialized and attached to the scene.
         // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
+        makeSandboxLink()
         guard let _ = (scene as? UIWindowScene) else { return }
     }
 

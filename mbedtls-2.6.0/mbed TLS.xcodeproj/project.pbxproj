@@ -17698,6 +17698,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedtls;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedtls.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -18386,6 +18387,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedcrypto;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedcrypto.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -19304,6 +19306,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedcrypto;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedcrypto.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -24391,6 +24394,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedcrypto;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedcrypto.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -27572,6 +27576,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedtls;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedtls.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -35562,6 +35567,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedtls;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedtls.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -37098,6 +37104,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedcrypto;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedcrypto.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;
@@ -39427,6 +39434,7 @@
 				OTHER_LIBTOOLFLAGS = "";
 				OTHER_REZFLAGS = "";
 				PRODUCT_NAME = mbedtls;
+				SDKROOT = macosx;
 				SECTORDER_FLAGS = "";
 				TARGET_TEMP_DIR = "/Users/sam/dev/github/shadowsocks-libev/mbedtls-2.6.0/build/mbedtls.build/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
 				USE_HEADERMAP = NO;

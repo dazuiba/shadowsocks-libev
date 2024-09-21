@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		220EF6B12C9EA29E0084A75D /* libsslocal.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 220EF6B02C9EA29E0084A75D /* libsslocal.xcframework */; };
+		220EF6B22C9EA29E0084A75D /* libsslocal.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 220EF6B02C9EA29E0084A75D /* libsslocal.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		220EF6B62C9EAB160084A75D /* ProxyClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6B52C9EAB160084A75D /* ProxyClient.swift */; };
+		220EF6B82C9EAB310084A75D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6B72C9EAB310084A75D /* Common.swift */; };
+		220EF6C22C9ECAD00084A75D /* CFHTTPDNSRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6BD2C9ECACF0084A75D /* CFHTTPDNSRequestTask.m */; };
+		220EF6C32C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6C12C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m */; };
 		2288F3ED2C9D2C83001CBBE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288F3EC2C9D2C83001CBBE4 /* AppDelegate.swift */; };
 		2288F3EF2C9D2C83001CBBE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288F3EE2C9D2C83001CBBE4 /* SceneDelegate.swift */; };
 		2288F3F12C9D2C83001CBBE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288F3F02C9D2C83001CBBE4 /* ViewController.swift */; };
@@ -39,12 +45,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2288F4BD2C9D2DCA001CBBE4 /* Embed Frameworks */ = {
+		220EF6B32C9EA29E0084A75D /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				220EF6B22C9EA29E0084A75D /* libsslocal.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -52,6 +59,16 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		220EF6A92C9E8B8E0084A75D /* libsslocal.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = libsslocal.framework; path = "../../../build/build/Debug-iphonesimulator/libsslocal.framework"; sourceTree = "<group>"; };
+		220EF6B02C9EA29E0084A75D /* libsslocal.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = libsslocal.xcframework; path = "../../../build/build/Debug-xcframework/libsslocal.xcframework"; sourceTree = "<group>"; };
+		220EF6B52C9EAB160084A75D /* ProxyClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProxyClient.swift; sourceTree = "<group>"; };
+		220EF6B72C9EAB310084A75D /* Common.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
+		220EF6B92C9EB60F0084A75D /* TestLibSSLocal-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TestLibSSLocal-Bridging-Header.h"; sourceTree = "<group>"; };
+		220EF6BD2C9ECACF0084A75D /* CFHTTPDNSRequestTask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFHTTPDNSRequestTask.m; sourceTree = "<group>"; };
+		220EF6BE2C9ECAD00084A75D /* CFHTTPDNSRequestTaskDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFHTTPDNSRequestTaskDelegate.h; sourceTree = "<group>"; };
+		220EF6BF2C9ECAD00084A75D /* CFHTTPDNSRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFHTTPDNSRequestTask.h; sourceTree = "<group>"; };
+		220EF6C02C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFHTTPDNSHTTPProtocol.h; sourceTree = "<group>"; };
+		220EF6C12C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFHTTPDNSHTTPProtocol.m; sourceTree = "<group>"; };
 		2288F3E92C9D2C83001CBBE4 /* TestLibSSLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestLibSSLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2288F3EC2C9D2C83001CBBE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2288F3EE2C9D2C83001CBBE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -76,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				220EF6B12C9EA29E0084A75D /* libsslocal.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +114,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220EF6B42C9EAB0D0084A75D /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				220EF6C02C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.h */,
+				220EF6C12C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m */,
+				220EF6BF2C9ECAD00084A75D /* CFHTTPDNSRequestTask.h */,
+				220EF6BD2C9ECACF0084A75D /* CFHTTPDNSRequestTask.m */,
+				220EF6BE2C9ECAD00084A75D /* CFHTTPDNSRequestTaskDelegate.h */,
+				22DA1B582C9DA44B009587BC /* SSLocalManager.swift */,
+				22DA1B762C9DB375009587BC /* FileMonitor.swift */,
+				220EF6B52C9EAB160084A75D /* ProxyClient.swift */,
+				220EF6B72C9EAB310084A75D /* Common.swift */,
+				220EF6B92C9EB60F0084A75D /* TestLibSSLocal-Bridging-Header.h */,
+			);
+			path = classes;
+			sourceTree = "<group>";
+		};
 		2288F3E02C9D2C83001CBBE4 = {
 			isa = PBXGroup;
 			children = (
@@ -121,6 +156,7 @@
 		2288F3EB2C9D2C83001CBBE4 /* TestLibSSLocal */ = {
 			isa = PBXGroup;
 			children = (
+				220EF6B42C9EAB0D0084A75D /* classes */,
 				2288F3EC2C9D2C83001CBBE4 /* AppDelegate.swift */,
 				2288F3EE2C9D2C83001CBBE4 /* SceneDelegate.swift */,
 				2288F3F02C9D2C83001CBBE4 /* ViewController.swift */,
@@ -128,8 +164,6 @@
 				2288F3F52C9D2C85001CBBE4 /* Assets.xcassets */,
 				2288F3F72C9D2C85001CBBE4 /* LaunchScreen.storyboard */,
 				2288F3FA2C9D2C85001CBBE4 /* Info.plist */,
-				22DA1B582C9DA44B009587BC /* SSLocalManager.swift */,
-				22DA1B762C9DB375009587BC /* FileMonitor.swift */,
 			);
 			path = TestLibSSLocal;
 			sourceTree = "<group>";
@@ -155,6 +189,8 @@
 		2288F4BA2C9D2DCA001CBBE4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				220EF6B02C9EA29E0084A75D /* libsslocal.xcframework */,
+				220EF6A92C9E8B8E0084A75D /* libsslocal.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -169,7 +205,7 @@
 				2288F3E52C9D2C83001CBBE4 /* Sources */,
 				2288F3E62C9D2C83001CBBE4 /* Frameworks */,
 				2288F3E72C9D2C83001CBBE4 /* Resources */,
-				2288F4BD2C9D2DCA001CBBE4 /* Embed Frameworks */,
+				220EF6B32C9EA29E0084A75D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -228,6 +264,7 @@
 				TargetAttributes = {
 					2288F3E82C9D2C83001CBBE4 = {
 						CreatedOnToolsVersion = 15.4;
+						LastSwiftMigration = 1540;
 					};
 					2288F3FE2C9D2C85001CBBE4 = {
 						CreatedOnToolsVersion = 15.4;
@@ -292,9 +329,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				2288F3F12C9D2C83001CBBE4 /* ViewController.swift in Sources */,
+				220EF6B62C9EAB160084A75D /* ProxyClient.swift in Sources */,
+				220EF6C22C9ECAD00084A75D /* CFHTTPDNSRequestTask.m in Sources */,
 				2288F3ED2C9D2C83001CBBE4 /* AppDelegate.swift in Sources */,
+				220EF6B82C9EAB310084A75D /* Common.swift in Sources */,
 				22DA1B772C9DB375009587BC /* FileMonitor.swift in Sources */,
 				2288F3EF2C9D2C83001CBBE4 /* SceneDelegate.swift in Sources */,
+				220EF6C32C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m in Sources */,
 				22DA1B592C9DA44B009587BC /* SSLocalManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -477,6 +518,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K4Y9WU5RYT;
@@ -495,6 +537,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = guangyu.TestLibSSLocal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "TestLibSSLocal/classes/TestLibSSLocal-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -505,6 +549,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = K4Y9WU5RYT;
@@ -523,6 +568,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = guangyu.TestLibSSLocal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "TestLibSSLocal/classes/TestLibSSLocal-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "ProxyClient.replaceHost(url:_:):ProxyClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "CustomURLProtocol.startLoading():ProxyClient.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ViewController.doRequest(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "-[CFHTTPDNSRequestTask startLoading]:CFHTTPDNSRequestTask.m">
+      </ContextState>
+      <ContextState
+         contextName = "static SSLocalConf.parse(url:localPort:logPath:):SSLocalManager.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "components!">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.isRequesting(_:):ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "ViewController.appendLog(_:):ViewController.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
