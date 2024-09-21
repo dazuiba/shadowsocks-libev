@@ -88,7 +88,7 @@
 #cmakedefine HAVE_NET_IF_H 1
 
 /* Define to 1 if you have the <pcre.h> header file. */
-#cmakedefine HAVE_PCRE_H 1
+# cmakedefine HAVE_PCRE_H 1
 
 /* Define to 1 if you have the <pcre/pcre.h> header file. */
 #cmakedefine HAVE_PCRE_PCRE_H 1

@@ -2192,4 +2192,10 @@ start_ss_local_server_with_callback(profile_t profile, ss_local_callback callbac
     return _start_ss_local_server(profile, callback, udata);
 }
 
+
+void stop_ss_local_server(void)
+{
+    ev_feed_signal(SIGINT); // 或者使用 SIGTERM
+}
+
 #endif

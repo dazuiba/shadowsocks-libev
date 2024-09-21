@@ -1,0 +1,34 @@
+//
+//  shadowsocks.xconfig.xcconfig
+//  TestLibSSLocal
+//
+//  Created by Zhanggy on 20.09.24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Define the common base path
+PLATFORM_LIB_PATH = /Users/sam/dev/github/shadowsocks-libev/iOS
+COMMON_LIB_PATH  = /Users/sam/dev/github/shadowsocks-libev/build/lib/Debug
+
+COMMON_LIBS = -L/opt/homebrew/opt/libsodium/lib -Wl,-search_paths_first -Wl,-headerpad_max_install_names \
+    $(COMMON_LIB_PATH)/libcork.a \
+    $(COMMON_LIB_PATH)/libipset.a \
+    $(COMMON_LIB_PATH)/libbloom.a \
+
+OTHER_LDFLAGS[sdk=iphoneos*] = $(inherited) \
+    $(PLATFORM_LIB_PATH)/iphoneos/libev.a \
+    $(PLATFORM_LIB_PATH)/iphoneos/libsodium.a \
+    $(PLATFORM_LIB_PATH)/iphoneos/libmbedtls.a \
+    $(PLATFORM_LIB_PATH)/iphoneos/libmbedcrypto.a \
+    $(PLATFORM_LIB_PATH)/iphoneos/libpcre.a \
+    $(COMMON_LIBS)
+
+OTHER_LDFLAGS[sdk=iphonesimulator*] = $(inherited) \
+    $(PLATFORM_LIB_PATH)/iphonesimulator/libev.a \
+    $(PLATFORM_LIB_PATH)/iphonesimulator/libsodium.a \
+    $(PLATFORM_LIB_PATH)/iphonesimulator/libmbedtls.a \
+    $(PLATFORM_LIB_PATH)/iphonesimulator/libmbedcrypto.a \
+    $(PLATFORM_LIB_PATH)/iphonesimulator/libpcre.a \
+    $(COMMON_LIBS)

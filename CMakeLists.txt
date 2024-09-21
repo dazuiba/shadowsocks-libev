@@ -65,6 +65,7 @@ include_directories(libcork/include)
 include_directories(libipset/include)
 include_directories(libbloom/murmur2)
 include_directories(libbloom)
+include_directories(/usr/local/include)
 
 set(LIBCORK_SOURCE
         libcork/src/libcork/cli/commands.c

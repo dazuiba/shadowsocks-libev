@@ -109,7 +109,7 @@ list(APPEND DEPS
         m
         bloom
         ${LIBEV}
-        ${LIBUDNS}
+        # ${LIBUDNS}
         ${LIBPCRE}
         ${LIBSODIUM}
         ${LIBMBEDTLS}
@@ -193,7 +193,7 @@ target_include_directories(shadowsocks-libev PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
 
 target_link_libraries(ss-server cork ipset ${DEPS})
 target_link_libraries(ss-tunnel cork ${DEPS})
-target_link_libraries(ss-manager m bloom cork ${LIBEV} ${LIBUDNS})
+target_link_libraries(ss-manager m bloom cork ${LIBEV} )
 target_link_libraries(ss-local cork ipset ${DEPS})
 target_link_libraries(ss-redir cork ipset ${DEPS})
 target_link_libraries(shadowsocks-libev cork ipset ${DEPS})

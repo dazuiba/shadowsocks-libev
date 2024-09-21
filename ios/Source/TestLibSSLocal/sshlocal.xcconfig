@@ -1,0 +1,17 @@
+//
+//  shadowsocks.xconfig.xcconfig
+//  TestLibSSLocal
+//
+//  Created by Zhanggy on 20.09.24.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// Define the common base path
+SS_BUILD_PATH = /Users/sam/dev/github/shadowsocks-libev/build/build
+
+FRAMEWORK_SEARCH_PATHS[sdk=iphoneos*] = $(inherited) $(SS_BUILD_PATH)/Debug-iphoneos
+FRAMEWORK_SEARCH_PATHS[sdk=iphonesimulator*] = $(inherited) $(SS_BUILD_PATH)/Debug-iphonesimulator
+
+OTHER_LDFLAGS = $(inherited) -framework libsslocal

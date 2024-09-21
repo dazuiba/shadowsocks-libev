@@ -89,6 +89,8 @@ int start_ss_local_server(profile_t profile);
  */
 int start_ss_local_server_with_callback(profile_t profile, ss_local_callback callback, void *udata);
 
+void stop_ss_local_server(void);
+
 #ifdef __cplusplus
 }
 #endif
