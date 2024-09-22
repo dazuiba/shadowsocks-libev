@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F465FF4F-483E-480A-AF57-234A3188862A"
+            uuid = "C5EC3A34-A513-48A6-9E57-DE0B3603219D"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "TestLibSSLocal/classes/SSLocalManager.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "150"
-            endingLineNumber = "150"
+            startingLineNumber = "153"
+            endingLineNumber = "153"
             landmarkName = "parse(url:localPort:logPath:)"
             landmarkType = "7">
          </BreakpointContent>

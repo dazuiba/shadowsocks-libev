@@ -896,6 +896,7 @@ main(int argc, char **argv)
     char *key        = NULL;
     char *timeout    = NULL;
     char *method     = NULL;
+    char *prefix        = NULL;
     char *pid_path   = NULL;
     char *conf_path  = NULL;
     char *iface      = NULL;
@@ -929,6 +930,7 @@ main(int argc, char **argv)
         { "tcp-outgoing-rcvbuf", required_argument, NULL, GETOPT_VAL_TCP_OUTGOING_RCVBUF },
         { "password",    required_argument, NULL, GETOPT_VAL_PASSWORD    },
         { "key",         required_argument, NULL, GETOPT_VAL_KEY         },
+        { "prefix",      required_argument, NULL, GETOPT_VAL_PREFIX      },
         { "help",        no_argument,       NULL, GETOPT_VAL_HELP        },
         { NULL,          0,                 NULL, 0                      }
     };
@@ -969,6 +971,9 @@ main(int argc, char **argv)
             break;
         case GETOPT_VAL_KEY:
             key = optarg;
+            break;
+        case GETOPT_VAL_PREFIX:
+            prefix = optarg;
             break;
         case GETOPT_VAL_REUSE_PORT:
             reuse_port = 1;

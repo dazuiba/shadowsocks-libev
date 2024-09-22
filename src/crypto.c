@@ -130,9 +130,13 @@ entropy_check(void)
     }
 #endif
 }
+crypto_t *
+crypto_init(const char *password, const char *key, const char *method){
+    return crypto_init2(password, key, method, NULL,0);
+}
 
 crypto_t *
-crypto_init(const char *password, const char *key, const char *method)
+crypto_init2(const char *password, const char *key, const char *method, const char *prefix, size_t prefixLen)
 {
     int i, m = -1;
 
@@ -157,7 +161,7 @@ crypto_init(const char *password, const char *key, const char *method)
             }
         if (m != -1) {
             LOGI("Stream ciphers are insecure, therefore deprecated, and should be almost always avoided.");
-            cipher_t *cipher = stream_init(password, key, method);
+            cipher_t *cipher = stream_init(password, key, method, prefix);
             if (cipher == NULL)
                 return NULL;
             crypto_t *crypto = (crypto_t *)ss_malloc(sizeof(crypto_t));
@@ -181,6 +185,11 @@ crypto_init(const char *password, const char *key, const char *method)
             }
         if (m != -1) {
             cipher_t *cipher = aead_init(password, key, method);
+            cipher->prefix_len = prefixLen;
+            if (prefixLen > 0 ) {
+                memcpy(cipher->prefix, prefix, prefixLen);
+            }
+
             if (cipher == NULL)
                 return NULL;
             crypto_t *crypto = (crypto_t *)ss_malloc(sizeof(crypto_t));

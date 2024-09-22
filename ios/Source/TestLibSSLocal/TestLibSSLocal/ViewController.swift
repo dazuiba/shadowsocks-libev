@@ -19,6 +19,7 @@ class ViewController: UITableViewController {
         ssSwithCell.accessoryView as! UISwitch
     }
     
+    @IBOutlet weak var prefixSwitch: UISwitch!
     //section 2
     @IBOutlet weak var ssConnectionCell: UITableViewCell!
     
@@ -57,7 +58,8 @@ class ViewController: UITableViewController {
         swich.addTarget(self, action: #selector(switchChanged), for: .touchUpInside)
         self.ssSwithCell.accessoryView = swich
 
-        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?outline=1"
+//        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?prefix=%16%03%01%00%C2%A8%01%01"
+        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?prefix=SSH-2.0%0D%0A"
 //        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@127.0.0.1:1082/?outline=1"
         let logFile = fileInDocument("sslocal.log",createIfNotExsit: true)
         let ssconf = SSLocalConf.parse(url: str, localPort:1081 ,logPath: logFile)!

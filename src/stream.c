@@ -632,7 +632,7 @@ stream_ctx_init(cipher_t *cipher, cipher_ctx_t *cipher_ctx, int enc)
 }
 
 cipher_t *
-stream_key_init(int method, const char *pass, const char *key)
+stream_key_init(int method, const char *pass, const char *key, const char *prefix)
 {
     if (method <= TABLE || method >= STREAM_CIPHER_NUM) {
         LOGE("cipher->key_init(): Illegal method");
@@ -676,7 +676,7 @@ stream_key_init(int method, const char *pass, const char *key)
 }
 
 cipher_t *
-stream_init(const char *pass, const char *key, const char *method)
+stream_init(const char *pass, const char *key, const char *method, const char *prefix)
 {
     int m = TABLE;
     if (method != NULL) {
@@ -693,5 +693,5 @@ stream_init(const char *pass, const char *key, const char *method)
         LOGE("Table is deprecated");
         return NULL;
     }
-    return stream_key_init(m, pass, key);
+    return stream_key_init(m, pass, key, prefix);
 }

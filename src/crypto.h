@@ -46,6 +46,7 @@ typedef mbedtls_cipher_info_t cipher_kt_t;
 typedef mbedtls_cipher_context_t cipher_evp_t;
 typedef mbedtls_md_info_t digest_type_t;
 #define MAX_KEY_LENGTH 64
+#define MAX_PREFIX_LENGTH 16
 #define MAX_NONCE_LENGTH 32
 #define MAX_MD_SIZE MBEDTLS_MD_MAX_SIZE
 /* we must have MBEDTLS_CIPHER_MODE_CFB defined */
@@ -100,8 +101,10 @@ typedef struct {
     cipher_kt_t *info;
     size_t nonce_len;
     size_t key_len;
+    size_t prefix_len;
     size_t tag_len;
     uint8_t key[MAX_KEY_LENGTH];
+    uint8_t prefix[MAX_PREFIX_LENGTH];
 } cipher_t;
 
 typedef struct {
@@ -134,6 +137,7 @@ int bprepend(buffer_t *, buffer_t *, size_t);
 void bfree(buffer_t *);
 int rand_bytes(void *, int);
 
+crypto_t *crypto_init2(const char *, const char *, const char *, const char *, size_t);
 crypto_t *crypto_init(const char *, const char *, const char *);
 unsigned char *crypto_md5(const unsigned char *, size_t, unsigned char *);
 

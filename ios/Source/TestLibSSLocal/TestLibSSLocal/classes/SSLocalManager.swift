@@ -81,11 +81,14 @@ func stopServer() {
 }
 
 func startServer(_ conf:SSLocalConf,delegate:SSLocalManager) -> Int32{
+    SSLogger.info("conf:\(conf.confByUrl)")
     let profile = profile_t(
         remote_host: strdup(conf.remoteHost),
         local_addr: strdup("127.0.0.1"),
         method: strdup(conf.method),
         password: strdup(conf.password),
+        prefix: strdup(conf.prefix),
+        prefixLen: conf.prefix?.count ?? 0,
         remote_port: conf.remotePort,
         local_port: conf.localPort,
         timeout: 300,
@@ -136,25 +139,36 @@ struct SSLocalConf :Codable {
     let remotePort:Int32
     let method:String
     let password:String
+    let prefix:String?
     var localPort:Int32
     let logPath:String
     static func parse(url:String, localPort:Int32 = 10086, logPath:String) -> Self? {
-        // ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?outline=1
-        // ss://Y2hhY2hhMjAtaWV0Zi1wb2x5MTMwNTp3RUJpRXZjSmVvQmZsUGNUZTlLd2NH@@10.0.0.19:33533/?outline=1
         guard let url = URL(string: url) else { return nil }
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let user = components?.user ?? ""
         let pass = components?.password ?? ""
         let host = components?.host ?? ""
         let port = components?.port ?? 0
-        
+        let prefix = components?.query(forKey: "prefix")
         return SSLocalConf(
             remoteHost: host,
             remotePort: Int32(port),
             method: user,
             password: pass,
+            prefix: prefix,
             localPort: localPort, // 默认本地端口
             logPath: logPath // 默认日志路径
         )
+    }
+    
+    var confByUrl: String {
+        return "ss://\(method):\(password)@\(remoteHost):\(remotePort)/?prefix=\(prefix ?? "")"
+    }
+}
+
+
+extension URLComponents {
+    func query(forKey:String) -> String? {
+        self.queryItems?.first { $0.name == forKey }?.value
     }
 }

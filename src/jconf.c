@@ -254,6 +254,9 @@ read_jconf(const char *file)
                 conf.key = to_string(value);
             } else if (strcmp(name, "method") == 0) {
                 conf.method = to_string(value);
+            } else if (strcmp(name, "prefix") == 0) {
+                conf.prefix = to_string(value);
+                conf.prefixLen = value->u.string.length;
             } else if (strcmp(name, "timeout") == 0) {
                 conf.timeout = to_string(value);
             } else if (strcmp(name, "user") == 0) {

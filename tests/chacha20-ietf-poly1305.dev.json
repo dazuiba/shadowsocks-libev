@@ -1,0 +1,11 @@
+{
+    "server":"0.0.0.0",
+    "server_port":9000,
+    "local_port":1081,
+    "password":"wEBiEvcJeoBflPcTe9KwcG",
+    "timeout":60,
+    "method":"chacha20-ietf-poly1305",
+    "local":"127.0.0.1",
+    "prefix":"SSH-2.0\r\n",
+    "fast_open":false
+}

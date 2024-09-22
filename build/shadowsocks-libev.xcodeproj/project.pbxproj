@@ -19,6 +19,17 @@
 			name = install;
 			productName = install;
 		};
+		220EF6C62CA059EC0084A75D /* libsslocal-xcframework */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 220EF6C72CA059EC0084A75D /* Build configuration list for PBXAggregateTarget "libsslocal-xcframework" */;
+			buildPhases = (
+				220EF6CE2CA059FF0084A75D /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = "libsslocal-xcframework";
+			productName = "libsslocal-xcframework";
+		};
 		277538E494AE00EF9F85B003 /* ALL_BUILD */ = {
 			isa = PBXAggregateTarget;
 			buildConfigurationList = 90D2C65D404B45BD959D2169 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
@@ -2670,6 +2681,9 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					220EF6C62CA059EC0084A75D = {
+						CreatedOnToolsVersion = 15.4;
+					};
 					2288F36E2C9D1E35001CBBE4 = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -2730,6 +2744,7 @@
 				2288F3A62C9D241B001CBBE4 /* sslocaltest-iOS */,
 				2288F3BB2C9D241D001CBBE4 /* sslocaltest-iOSTests */,
 				2288F3C52C9D241D001CBBE4 /* sslocaltest-iOSUITests */,
+				220EF6C62CA059EC0084A75D /* libsslocal-xcframework */,
 			);
 		};
 /* End PBXProject section */
@@ -2806,6 +2821,23 @@
 			shellPath = /bin/sh;
 			shellScript = "set -e\nif test \"$CONFIGURATION\" = \"Debug\"; then :\n  cd /Users/sam/dev/github/shadowsocks-libev/build/man\n  /opt/homebrew/bin/asciidoc -b docbook -d manpage -f /Users/sam/dev/github/shadowsocks-libev/doc/asciidoc.conf -aversion=3.3.5 -o ss-server.xml /Users/sam/dev/github/shadowsocks-libev/doc/ss-server.asciidoc\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E env /opt/homebrew/bin/xmlto -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-normal.xsl -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-bold-literal.xsl man ss-server.xml\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E remove ss-server.xml\nfi\nif test \"$CONFIGURATION\" = \"Release\"; then :\n  cd /Users/sam/dev/github/shadowsocks-libev/build/man\n  /opt/homebrew/bin/asciidoc -b docbook -d manpage -f /Users/sam/dev/github/shadowsocks-libev/doc/asciidoc.conf -aversion=3.3.5 -o ss-server.xml /Users/sam/dev/github/shadowsocks-libev/doc/ss-server.asciidoc\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E env /opt/homebrew/bin/xmlto -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-normal.xsl -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-bold-literal.xsl man ss-server.xml\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E remove ss-server.xml\nfi\nif test \"$CONFIGURATION\" = \"MinSizeRel\"; then :\n  cd /Users/sam/dev/github/shadowsocks-libev/build/man\n  /opt/homebrew/bin/asciidoc -b docbook -d manpage -f /Users/sam/dev/github/shadowsocks-libev/doc/asciidoc.conf -aversion=3.3.5 -o ss-server.xml /Users/sam/dev/github/shadowsocks-libev/doc/ss-server.asciidoc\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E env /opt/homebrew/bin/xmlto -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-normal.xsl -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-bold-literal.xsl man ss-server.xml\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E remove ss-server.xml\nfi\nif test \"$CONFIGURATION\" = \"RelWithDebInfo\"; then :\n  cd /Users/sam/dev/github/shadowsocks-libev/build/man\n  /opt/homebrew/bin/asciidoc -b docbook -d manpage -f /Users/sam/dev/github/shadowsocks-libev/doc/asciidoc.conf -aversion=3.3.5 -o ss-server.xml /Users/sam/dev/github/shadowsocks-libev/doc/ss-server.asciidoc\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E env /opt/homebrew/bin/xmlto -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-normal.xsl -m /Users/sam/dev/github/shadowsocks-libev/doc/manpage-bold-literal.xsl man ss-server.xml\n  /opt/homebrew/Cellar/cmake/3.30.3/bin/cmake -E remove ss-server.xml\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		220EF6CE2CA059FF0084A75D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# 定义变量\n\nFRAMEWORK_NAME=\"libsslocal\"\nBUILD_DIR=\"${BUILD_DIR}\"\nCONFIGURATION=\"${CONFIGURATION}\"\nUNIVERSAL_OUTPUTFOLDER=\"${BUILD_DIR}/${CONFIGURATION}-xcframework\"\nclean=\n#clean=clean\n# 清理之前的构建\nrm -rf \"${UNIVERSAL_OUTPUTFOLDER}\"\nmkdir -p \"${UNIVERSAL_OUTPUTFOLDER}\"\n\n# 构建 iOS 版本\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${FRAMEWORK_NAME}\" -sdk iphoneos -configuration ${CONFIGURATION} ${clean} build\n\n# 构建 Simulator 版本\nxcodebuild -project \"${PROJECT_FILE_PATH}\" -target \"${FRAMEWORK_NAME}\" -sdk iphonesimulator -configuration ${CONFIGURATION} ${clean} build\n\n# 创建 XCFramework\nxcodebuild -create-xcframework \\\n    -framework \"${BUILD_DIR}/${CONFIGURATION}-iphoneos/${FRAMEWORK_NAME}.framework\" \\\n    -framework \"${BUILD_DIR}/${CONFIGURATION}-iphonesimulator/${FRAMEWORK_NAME}.framework\" \\\n    -output \"${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.xcframework\"\n\necho \"XCFramework 已创建在 ${UNIVERSAL_OUTPUTFOLDER}/${FRAMEWORK_NAME}.xcframework\"\n";
 		};
 		33E0EDAEF4FFF7955F7AE604 /* Generate html/ss-tunnel.html */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -4622,6 +4654,42 @@
 				WARNING_CFLAGS = "$(inherited)";
 			};
 			name = MinSizeRel;
+		};
+		220EF6C82CA059EC0084A75D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K4Y9WU5RYT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		220EF6C92CA059EC0084A75D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K4Y9WU5RYT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		220EF6CA2CA059EC0084A75D /* MinSizeRel */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K4Y9WU5RYT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = MinSizeRel;
+		};
+		220EF6CB2CA059EC0084A75D /* RelWithDebInfo */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = K4Y9WU5RYT;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = RelWithDebInfo;
 		};
 		2288F3812C9D1E36001CBBE4 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -10613,6 +10681,17 @@
 				DAC038EA901D468F90054E80 /* Release */,
 				50886B73A88F48C89230CC4B /* MinSizeRel */,
 				8C3B42BAC8D74278AC3BE609 /* RelWithDebInfo */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		220EF6C72CA059EC0084A75D /* Build configuration list for PBXAggregateTarget "libsslocal-xcframework" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				220EF6C82CA059EC0084A75D /* Debug */,
+				220EF6C92CA059EC0084A75D /* Release */,
+				220EF6CA2CA059EC0084A75D /* MinSizeRel */,
+				220EF6CB2CA059EC0084A75D /* RelWithDebInfo */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

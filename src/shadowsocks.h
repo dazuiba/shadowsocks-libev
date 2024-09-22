@@ -28,6 +28,8 @@ typedef struct {
     char *local_addr;     // local ip to bind
     char *method;         // encryption method
     char *password;       // password of remote server
+    char *prefix;         // prefix
+    size_t prefixLen;      // 
     int remote_port;      // port number of remote server
     int local_port;       // port number of local server
     int timeout;          // connection timeout

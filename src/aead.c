@@ -39,6 +39,7 @@
 #include "aead.h"
 #include "utils.h"
 #include "winsock.h"
+#include <wchar.h>
 
 #define NONE                    (-1)
 #define AES128GCM               0
@@ -367,9 +368,13 @@ aead_ctx_init(cipher_t *cipher, cipher_ctx_t *cipher_ctx, int enc)
     cipher_ctx->cipher = cipher;
 
     aead_cipher_ctx_init(cipher_ctx, cipher->method, enc);
-
+    
     if (enc) {
-        rand_bytes(cipher_ctx->salt, cipher->key_len);
+        size_t prefixlen = cipher_ctx->cipher->prefix_len;
+        if(prefixlen > 0) {
+            memcpy(cipher_ctx->salt, cipher_ctx->cipher->prefix, prefixlen);
+        }
+        rand_bytes(cipher_ctx->salt + prefixlen, (int)(cipher->key_len - prefixlen));
     }
 }
 
@@ -682,8 +687,8 @@ aead_decrypt(buffer_t *ciphertext, cipher_ctx_t *cipher_ctx, size_t capacity)
             if (plen == 0)
                 return err;
             else{
-                memmove((uint8_t *)cipher_ctx->chunk->data, 
-			(uint8_t *)cipher_ctx->chunk->data + cidx, chunk_clen);
+                memmove((uint8_t *)cipher_ctx->chunk->data,
+            (uint8_t *)cipher_ctx->chunk->data + cidx, chunk_clen);
                 break;
             }
         }
@@ -749,8 +754,8 @@ aead_key_init(int method, const char *pass, const char *key)
 
     cipher->nonce_len = supported_aead_ciphers_nonce_size[method];
     cipher->tag_len   = supported_aead_ciphers_tag_size[method];
+    
     cipher->method    = method;
-
     return cipher;
 }
 

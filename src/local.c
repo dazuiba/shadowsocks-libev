@@ -1433,6 +1433,8 @@ main(int argc, char **argv)
     char *local_addr = NULL;
     char *password   = NULL;
     char *key        = NULL;
+    char *prefix        = NULL;
+    size_t prefixLen  = 0;
     char *timeout    = NULL;
     char *method     = NULL;
     char *pid_path   = NULL;
@@ -1638,6 +1640,10 @@ main(int argc, char **argv)
         }
         if (method == NULL) {
             method = conf->method;
+        }
+        if (prefix == NULL) {
+            prefix = conf->prefix;
+            prefixLen = conf->prefixLen;
         }
         if (timeout == NULL) {
             timeout = conf->timeout;
@@ -1889,8 +1895,8 @@ main(int argc, char **argv)
 #endif
 
     // Setup keys
-    LOGI("initializing ciphers... %s", method);
-    crypto = crypto_init(password, key, method);
+    LOGI("initializing ciphers... %s, %s", method,prefix);
+    crypto = crypto_init2(password, key, method, prefix,prefixLen);
     if (crypto == NULL)
         FATAL("failed to initialize ciphers");
 
@@ -2043,6 +2049,8 @@ _start_ss_local_server(profile_t profile, ss_local_callback callback, void *udat
     char *local_addr  = profile.local_addr;
     char *method      = profile.method;
     char *password    = profile.password;
+    char *prefix      = profile.prefix;
+    size_t prefixLen  = profile.prefixLen;
     char *log         = profile.log;
     int remote_port   = profile.remote_port;
     int local_port    = profile.local_port;
@@ -2092,8 +2100,8 @@ _start_ss_local_server(profile_t profile, ss_local_callback callback, void *udat
 #endif
 
     // Setup keys
-    LOGI("initializing ciphers... %s", method);
-    crypto = crypto_init(password, NULL, method);
+    LOGI("initializing ciphers... %s, %s", method,prefix);
+    crypto = crypto_init2(password, NULL, method, prefix, prefixLen);
     if (crypto == NULL)
         FATAL("failed to init ciphers");
 

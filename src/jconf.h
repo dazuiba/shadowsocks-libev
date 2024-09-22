@@ -65,6 +65,8 @@ typedef struct {
     char *local_port;
     char *password;
     char *key;
+    char *prefix;
+    size_t prefixLen;
     char *method;
     char *timeout;
     char *user;
