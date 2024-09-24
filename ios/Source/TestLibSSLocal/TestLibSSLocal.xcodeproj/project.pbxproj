@@ -13,6 +13,7 @@
 		220EF6B82C9EAB310084A75D /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6B72C9EAB310084A75D /* Common.swift */; };
 		220EF6C22C9ECAD00084A75D /* CFHTTPDNSRequestTask.m in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6BD2C9ECACF0084A75D /* CFHTTPDNSRequestTask.m */; };
 		220EF6C32C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 220EF6C12C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m */; };
+		227E5E642CA2692200C7340D /* MyWebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 227E5E632CA2692200C7340D /* MyWebViewController.swift */; };
 		2288F3ED2C9D2C83001CBBE4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288F3EC2C9D2C83001CBBE4 /* AppDelegate.swift */; };
 		2288F3EF2C9D2C83001CBBE4 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288F3EE2C9D2C83001CBBE4 /* SceneDelegate.swift */; };
 		2288F3F12C9D2C83001CBBE4 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2288F3F02C9D2C83001CBBE4 /* ViewController.swift */; };
@@ -69,6 +70,7 @@
 		220EF6BF2C9ECAD00084A75D /* CFHTTPDNSRequestTask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFHTTPDNSRequestTask.h; sourceTree = "<group>"; };
 		220EF6C02C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CFHTTPDNSHTTPProtocol.h; sourceTree = "<group>"; };
 		220EF6C12C9ECAD00084A75D /* CFHTTPDNSHTTPProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CFHTTPDNSHTTPProtocol.m; sourceTree = "<group>"; };
+		227E5E632CA2692200C7340D /* MyWebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyWebViewController.swift; sourceTree = "<group>"; };
 		2288F3E92C9D2C83001CBBE4 /* TestLibSSLocal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestLibSSLocal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2288F3EC2C9D2C83001CBBE4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2288F3EE2C9D2C83001CBBE4 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -164,6 +166,7 @@
 				2288F3F52C9D2C85001CBBE4 /* Assets.xcassets */,
 				2288F3F72C9D2C85001CBBE4 /* LaunchScreen.storyboard */,
 				2288F3FA2C9D2C85001CBBE4 /* Info.plist */,
+				227E5E632CA2692200C7340D /* MyWebViewController.swift */,
 			);
 			path = TestLibSSLocal;
 			sourceTree = "<group>";
@@ -329,6 +332,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2288F3F12C9D2C83001CBBE4 /* ViewController.swift in Sources */,
+				227E5E642CA2692200C7340D /* MyWebViewController.swift in Sources */,
 				220EF6B62C9EAB160084A75D /* ProxyClient.swift in Sources */,
 				220EF6C22C9ECAD00084A75D /* CFHTTPDNSRequestTask.m in Sources */,
 				2288F3ED2C9D2C83001CBBE4 /* AppDelegate.swift in Sources */,

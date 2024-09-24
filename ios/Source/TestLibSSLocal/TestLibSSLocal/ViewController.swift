@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
 class ViewController: UITableViewController {
     //section 1
@@ -48,10 +49,22 @@ class ViewController: UITableViewController {
     var sslocal = SSLocalManager.shared
     var logMonitor:FileMonitor!
     var requestTask: URLSessionDataTask?
+    @objc func pushWebVC() {
+        let myweb = storyboard?.instantiateViewController(withIdentifier: "MyWebViewController") as! MyWebViewController
+//        let url = "https://www.youtubekits.com",
+        let url = "https://www.google.com"
+        myweb.openParam = .init(homeUrl: URL(string: url)!,
+//                              customUserAgent: "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko)",
+                                customUserAgent: "Mozilla/5.0 (iPad; CPU OS 6_0 like Mac OS X   ) AppleWebKit/537.36 (KHTML, like Gecko)",
+
+                                appNameForUserAgent: "Chrome/129.0.0.0")
+        self.navigationController?.pushViewController(myweb, animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
-        
+        self.navigationItem.rightBarButtonItem = .init(title: "open url", style: .plain, target: self, action: #selector(pushWebVC))
         // 创建一个自定义的 Accessory View
         let swich = UISwitch()
         swich.isOn = true
@@ -59,7 +72,7 @@ class ViewController: UITableViewController {
         self.ssSwithCell.accessoryView = swich
 
 //        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?prefix=%16%03%01%00%C2%A8%01%01"
-        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?prefix=SSH-2.0%0D%0A"
+        let str = "ss://chacha20-ietf-poly1305:85NvqOb3plzgqCDRPuuSXo@146.190.165.168:37950/?prefix=SSH-2.0%0D%0A"
 //        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@127.0.0.1:1082/?outline=1"
         let logFile = fileInDocument("sslocal.log",createIfNotExsit: true)
         let ssconf = SSLocalConf.parse(url: str, localPort:1081 ,logPath: logFile)!

@@ -1,12 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="0cF-j3-s5F">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="86f-a1-Bjf">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="uR3-60-gyT">
+            <objects>
+                <navigationController id="86f-a1-Bjf" sceneMemberID="viewController">
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" barStyle="black" prompted="NO"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="smi-Jc-Kb7">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="0cF-j3-s5F" kind="relationship" relationship="rootViewController" id="gdY-gu-of0"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UAB-iS-BuO" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-934" y="-425"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="Mkx-V4-ISO">
             <objects>
@@ -230,6 +248,7 @@
                             <outlet property="delegate" destination="0cF-j3-s5F" id="kqg-gH-4Ze"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" id="nhR-vB-GHB"/>
                     <connections>
                         <outlet property="cancelButton" destination="AXk-3P-FhR" id="PrM-NL-NP9"/>
                         <outlet property="logTextView" destination="sHg-Yh-tQW" id="krz-Z9-3l6"/>
@@ -244,7 +263,37 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eLq-uN-zVe" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="696.94656488549617" y="-76.056338028169023"/>
+            <point key="canvasLocation" x="294" y="-425"/>
+        </scene>
+        <!--My Web View Controller-->
+        <scene sceneID="fJp-Ou-cON">
+            <objects>
+                <viewController storyboardIdentifier="MyWebViewController" id="Mwm-fS-OL5" customClass="MyWebViewController" customModule="TestLibSSLocal" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4Z1-VE-6Ug">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="FQQ-L1-xeu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1ox-Hv-mbb">
+                        <nil key="title"/>
+                        <textField key="titleView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search or type URL" textAlignment="natural" minimumFontSize="17" id="oHJ-kL-FFI">
+                            <rect key="frame" x="128" y="11" width="157" height="23"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                            <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="webSearch" returnKeyType="go" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                            <connections>
+                                <outlet property="delegate" destination="Mwm-fS-OL5" id="w5t-6J-r8Q"/>
+                            </connections>
+                        </textField>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="textField" destination="oHJ-kL-FFI" id="ya3-3m-JAK"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zfs-is-tas" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1069" y="-432"/>
         </scene>
     </scenes>
     <resources>
