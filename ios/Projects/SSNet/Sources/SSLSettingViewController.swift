@@ -8,8 +8,8 @@
 import UIKit
 import Combine
 let storyboard = UIStoryboard(name: "Main", bundle: nil)
-
-class SSLSettingViewController: UITableViewController {
+@objc(SSLSettingViewController)
+public class SSLSettingViewController: UITableViewController {
     //section 1
     @IBOutlet weak var ssSwithCell: UITableViewCell!
     
@@ -61,7 +61,7 @@ class SSLSettingViewController: UITableViewController {
 //        self.navigationController?.pushViewController(myweb, animated: true)
     }
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.delegate = self
         self.navigationItem.rightBarButtonItem = .init(title: "open url", style: .plain, target: self, action: #selector(pushWebVC))
@@ -196,7 +196,7 @@ class SSLSettingViewController: UITableViewController {
     }
     
     // 实现 UITableViewDelegate 方法
-    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+    public override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         // 处理附件视图点击事件
         let cell = tableView.cellForRow(at: indexPath)
         if cell == self.ssConnectionCell {

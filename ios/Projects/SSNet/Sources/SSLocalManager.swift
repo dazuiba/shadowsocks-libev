@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 import libsslocal
 
 public class SSLocalManager {
@@ -80,6 +81,13 @@ public class SSLocalManager {
             operationQueue = DispatchQueue(label: "sslocal.operation")
             serverRunQueue = DispatchQueue(label: "sslocal.server")
         }
+    }
+    
+    public func createSettingViewController() -> UIViewController {
+        let storyboard = UIStoryboard(name: "SSNet", bundle:Bundle.module)
+        let settingvc = storyboard.instantiateViewController(withIdentifier: "setting")
+        return settingvc
+        
     }
 }
 
