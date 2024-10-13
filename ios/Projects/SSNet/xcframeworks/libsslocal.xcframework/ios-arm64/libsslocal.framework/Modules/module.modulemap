@@ -1,0 +1,6 @@
+framework module libsslocal {
+  umbrella header "libsslocal.h"
+  export *
+
+  module * { export * }
+}
