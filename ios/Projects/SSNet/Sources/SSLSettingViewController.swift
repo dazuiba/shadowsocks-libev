@@ -45,7 +45,6 @@ public class SSLSettingViewController: UITableViewController {
     @IBOutlet weak var useSocksProxy: UISwitch!
     @IBOutlet weak var useIpConnect: UISwitch!
     
-    var client:ProxyClient!
     var sslocal = SSLocalManager.shared
     var logMonitor:FileMonitor!
     var requestTask: URLSessionDataTask?
@@ -71,17 +70,11 @@ public class SSLSettingViewController: UITableViewController {
         swich.addTarget(self, action: #selector(switchChanged), for: .touchUpInside)
         self.ssSwithCell.accessoryView = swich
 
-//        let str = "ss://chacha20-ietf-poly1305:wEBiEvcJeoBflPcTe9KwcG@10.0.0.19:33533/?prefix=%16%03%01%00%C2%A8%01%01"
-        let str = "ss://chacha20-ietf-poly1305:85NvqOb3plzgqCDRPuuSXo@146.190.165.168:37950/?prefix=SSH-2.0%0D%0A"
         let logFile = fileInDocument("sslocal.log",createIfNotExsit: true)
-        let ssconf = SSLocalConf.parse(url: str, localPort:1081 ,logPath: logFile)!
-        sslocal.setConfig(ssconf)
-
-        self.client = ProxyClient(config: ["api.ipify.org":"104.26.13.205"],sslocalPort: ssconf.localPort)
-
         self.connectionUrlLabel.text = "\(sslocal.config.remoteHost):\(sslocal.config.remotePort)"
         self.urlTextField.text = "https://api.ipify.org/?format=json"
-        
+        switchControl.isOn = true
+
         self.sslocal.$state
             .receive(on: DispatchQueue.main)
             .sink { [weak self] state in
@@ -103,8 +96,6 @@ public class SSLSettingViewController: UITableViewController {
             }
         }
         logMonitor.startMonitoring()
-        switchControl.isOn = true
-        switchChanged(switchControl)
         logTextView.text = nil
     }
     
@@ -124,23 +115,22 @@ public class SSLSettingViewController: UITableViewController {
             return
         }
         isRequesting(true)
-        let opt = RequestOption(ipConnect: self.useIpConnect.isOn, useProxy: self.useSocksProxy.isOn)
-        self.requestTask = logTry{
-            try client.request(url: url,option: opt, block: { str in
+        let req = URLRequest(url: url)
+        self.requestTask = ProxyClient.shared.session.dataTask(with: req as URLRequest) { data, response, error in
+                var log:String! = nil
+                 if let error {
+                     log = "[Req],finish,error: \(error.localizedDescription)"
+                 } else if let data,let responseString = String(data: data, encoding: .utf8) {
+                     log = "[Req],finish,resp: \(responseString)"
+                 } else {
+                     log = "[Req],finish,Invalid data"
+                 }
                 Task { @MainActor in
-                    self.appendLog(str)
+                    self.appendLog(log)
                     self.isRequesting(false)
                 }
-            })
-        }
-        
-//        self.requestTask = client.request(with: url) { str, err in
-//            Task { @MainActor in
-//                self.appendLog(str ?? "err:\(String(describing: err))")
-//                self.isRequesting(false)
-//            }
-//
-//        }
+             }
+        self.requestTask!.resume()
     }
     
     func isRequesting(_ requeting:Bool) {

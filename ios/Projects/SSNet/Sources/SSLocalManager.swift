@@ -64,7 +64,7 @@ public class SSLocalManager {
             case .DisConnecting:
                 return self == .Connected || self == .Connecting
             default:
-                return true
+                return false
             }
         }
     }
@@ -150,14 +150,14 @@ public struct SSLogger {
 }
 
 public struct SSLocalConf :Codable {
-    let remoteHost:String
-    let remotePort:Int32
-    let method:String
-    let password:String
-    let prefix:String?
-    var localPort:Int32
-    let logPath:String
-    static func parse(url:String, localPort:Int32 = 10086, logPath:String) -> Self? {
+    public let remoteHost:String
+    public let remotePort:Int32
+    public let method:String
+    public let password:String
+    public let prefix:String?
+    public var localPort:Int32
+    public let logPath:String
+    public static func parse(url:String, localPort:Int32 = 10086, logPath:String) -> Self? {
         guard let url = URL(string: url) else { return nil }
         let components = URLComponents(url: url, resolvingAgainstBaseURL: false)
         let user = components?.user ?? ""

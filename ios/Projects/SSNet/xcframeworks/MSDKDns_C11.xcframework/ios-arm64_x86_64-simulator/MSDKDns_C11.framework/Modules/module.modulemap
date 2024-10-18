@@ -1,0 +1,6 @@
+framework module MSDKDns_C11 {
+  umbrella header "MSDKDns.h"
+  export *
+
+  module * { export * }
+}

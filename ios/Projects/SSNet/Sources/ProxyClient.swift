@@ -6,74 +6,56 @@
 //
 
 import UIKit
-//import SSNet
+import MSDKDns_C11
+import SSNetOC
+public protocol MetricDelegate{
+    func urlSession(_ session: URLSession,
+                    task: URLSessionTask,
+                    didFinishCollecting metrics: URLSessionTaskMetrics);
+}
 struct RequestOption {
     let ipConnect:Bool
     let useProxy:Bool
 }
-class ProxyClient: NSObject,URLSessionDelegate {
-    var session:URLSession!
-    let ipAddressConfig:[String:String]
-    init(config:[String:String],sslocalPort:Int32) {
-        self.ipAddressConfig = config
+public class ProxyClient: NSObject,URLSessionDelegate, URLSessionTaskDelegate, SSNetURLProtocolHelper {
+    public static var preResolvedDomains = [String]()
+    public static let shared = ProxyClient()
+    public func connectionProxyDictionaryOrNil() -> [AnyHashable : Any]? {
+        let port = SSLocalManager.shared.config.localPort
+        return [
+            kCFStreamPropertySOCKSProxyHost as String: "127.0.0.1",
+            kCFStreamPropertySOCKSProxyPort as String: port,
+            kCFStreamPropertySOCKSVersion as String: kCFStreamSocketSOCKSVersion5 as String
+        ]
+    }
+    
+    public func shouldProcessDomain(_ domain: String!) -> Bool {
+        return true
+    }
+    
+    public func getHostByName(_ domain: String!) -> [Any]! {
+        self.msdkDns.wgGetHost(byName: domain)
+    }
+    
+    public private(set) var session:URLSession!
+    private var msdkDns: MSDKDns!
+    public static var metric:MetricDelegate?
+    private override init() {
         super.init()
-
-//        let sessionConfig = URLSessionConfiguration.default
-//        sessionConfig.protocolClasses = [CFHTTPDNSHTTPProtocol.self];
-//        self.session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
-        
-//        NSDictionary *proxySettings = @{
-//            (NSString *)kCFStreamPropertySOCKSProxyHost: @"your.proxy.host",
-//            (NSString *)kCFStreamPropertySOCKSProxyPort: @1080, // 代理端口
-//            (NSString *)kCFStreamPropertySOCKSVersion: (NSString *)kCFStreamSocketSOCKSVersion5 // 使用 SOCKS5
-//        };
-
-//        CFHTTPDNSRequestTask.setProxySetting([kCFStreamPropertySOCKSProxyHost:"127.0.0.1",kCFStreamPropertySOCKSProxyPort:sslocalPort,kCFStreamPropertySOCKSVersion:kCFStreamSocketSOCKSVersion5]);
+        SSNetURLProtocol.setProtocolHelper(self)
+        let sessionConfig = URLSessionConfiguration.default
+        sessionConfig.protocolClasses = [SSNetURLProtocol.self]
+        self.session = URLSession(configuration: sessionConfig, delegate: self, delegateQueue: nil)
+        self.msdkDns = MSDKDns.sharedInstance() as? MSDKDns;
+        self.msdkDns.initConfig(with: [
+            "debug": true,
+            "dnsId": "99615",
+            "dnsKey": "967208304",
+            "encryptType": 2, // 0 -> des，1 -> aes，2 -> https
+        ]);
+        self.msdkDns.wgSetPreResolvedDomains(Self.preResolvedDomains)
     }
-    
-    private func replaceHost(url:URL,_ option:RequestOption) throws -> URLRequest {
-        
-        guard var comp = URLComponents(url: url, resolvingAgainstBaseURL: false),let originHost = comp.host  else {
-            throw SSLocalError.common("invalid_url,\(url)")
-        }
-        var req = URLRequest(url: url)
-        if option.ipConnect {
-            guard let ipaddress = self.ipAddressConfig[originHost] else {
-                throw SSLocalError.common("invalid_host,no ip registed\(originHost)")
-            }
-            comp.host = ipaddress
-            req = URLRequest(url: comp.url!)
-            req.setValue(originHost, forHTTPHeaderField: "X-SSLocal-Real-Host")
-        }
-        if option.useProxy {
-            precondition(option.ipConnect)
-            req.setValue("1", forHTTPHeaderField: "X-SSLocal-Proxy")
-        }
-        return req
-    }
-    
-    func request(url:URL,
-                 option:RequestOption,
-                 block: @escaping ((String) -> (Void))) throws -> URLSessionDataTask {
-        var req = try replaceHost(url: url,option)
-
-        let task = session.dataTask(with: req as URLRequest) { data, response, error in
-            if let error = error {
-                block("[Req],finish,error: \(error.localizedDescription)")
-                return
-            }
-            guard let data = data, let responseString = String(data: data, encoding: .utf8) else {
-                block("[Req],finish,Invalid data")
-                return
-            }
-            block("[Req],finish,resp: \(responseString)")
-
-        }
-        task.resume()
-        return task
-    }
-    
-    func cancel(_ task: URLSessionDataTask) {
-        task.cancel()
+    public func urlSession(_ session: URLSession, task: URLSessionTask, didFinishCollecting metrics: URLSessionTaskMetrics){
+        Self.metric?.urlSession(session, task: task, didFinishCollecting: metrics)
     }
 }
